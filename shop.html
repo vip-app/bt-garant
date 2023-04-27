@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Магазин</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="OneTech shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="styles/shop_styles.css">
+<link rel="stylesheet" type="text/css" href="styles/shop_responsive.css">
+</head>
+
+<body>
+<!-- Start Vue -->
+<div id="shop_app">
+<div class="super_container">
+	
+	<!-- Header -->
+	
+	<header class="header">
+
+		<!-- Top Bar -->
+
+		<div class="top_bar">
+			<div class="container">
+				<div class="row">
+					<div class="col d-flex flex-row">
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.svg" alt=""></div><a @click="openTel()">+{{data.tel}}</a></div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/whatsapp.svg" alt=""></div><a @click="openWhatsApp">+{{data.whatsapp}}</a></div>
+					</div>
+				</div>
+			</div>		
+		</div>
+
+		<!-- Header Main -->
+
+		<div class="header_main">
+			<div class="container">
+				<div class="row">
+
+					<!-- Logo -->
+					<div class="col-lg-2 col-sm-3 col-3 order-1">
+						<div class="logo_container">
+							<div class="logo"><a href="index.html">{{data.title}}</a></div>
+						</div>
+					</div>
+
+					<!-- Search -->
+					<div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+						<div class="header_search">
+							<div class="header_search_content">
+								<div class="header_search_form_container">
+									<form class="header_search_form clearfix">
+										<input v-model="search" type="search" required="required" class="header_search_input" placeholder="Поиск товаров...">
+										<div class="custom_dropdown">
+											<div class="custom_dropdown_list">
+												<span class="custom_dropdown_placeholder clc">Все категории</span>
+												<ul class="custom_list clc"></ul>
+											</div>
+										</div>
+										<button @click="onSearch()" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Избранные -->
+					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
+								<div class="wishlist_icon"><a href="#wishlist"><img src="images/heart.png" alt=""></a></div>
+								<div class="wishlist_content">
+									<div class="wishlist_text"><a href="#wishlist">Избранные</a></div>
+									<div class="wishlist_count">{{wishlist.length}}</div>
+								</div>
+							</div>
+
+							<!-- Корзина -->
+							<div class="cart">
+								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
+									<div class="cart_icon">
+										<a href="cart.html">
+										    <img src="images/cart.png" alt="">
+										    <div class="cart_count"><span>{{cart.length}}</span></div>
+										</a>
+									</div>
+									<div class="cart_content">
+										<div class="cart_text"><a href="cart.html">Корзина</a></div>
+										<div class="cart_price">&#8381;{{totalAmount}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Main Navigation -->
+
+		<nav class="main_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						
+						<div class="main_nav_content d-flex flex-row">
+
+							<!-- Категории Menu -->
+
+							<div class="cat_menu_container">
+								<div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+									<div class="cat_burger"><span></span><span></span><span></span></div>
+									<div class="cat_menu_text">КАТЕГОРИИ</div>
+								</div>
+
+								<ul v-if="categories.length" class="cat_menu">
+									<li v-for="(category, index) in categories" :key="index" class="hassubs">
+										<a :style="{color: category.category === currentCategory ? '#0e8ce4' : 'gray'}">{{category.category}}<i class="fas fa-chevron-right"></i></a>
+										<ul>
+											<li v-for="(subcategory, index) in category.subcategories" :key="index">
+												<a @click="onSubcategory(category.category, subcategory.subcategory)" :style="{color: subcategory.subcategory === currentSubcategory ? '#0e8ce4' : 'gray'}">{{subcategory.subcategory}}<i class="fas fa-chevron-right"></i></a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+
+							<!-- Main Nav Menu -->
+
+							<div class="main_nav_menu ml-auto mr-auto">
+								<ul class="standard_dropdown main_nav_dropdown">
+									<li><a href="index.html">Главная<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="shop.html">Магазин<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="cart.html">Корзина<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="contact.html">Контакты<i class="fas fa-chevron-down"></i></a></li>
+								</ul>
+							</div>
+
+							<!-- Menu Trigger -->
+
+							<div class="menu_trigger_container ml-auto">
+								<div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+									<div class="menu_burger">
+										<div class="menu_trigger_text">МЕНЮ</div>
+										<div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<!-- Menu -->
+
+		<div class="page_menu">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						
+						<div class="page_menu_content">
+							
+							<div class="page_menu_search">
+								<form>
+									<input v-model="search" type="search" required="required" class="page_menu_search_input" placeholder="Поиск товаров...">
+									<button @click="onSearch()" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
+								</form>
+							</div>
+							<ul class="page_menu_nav">
+								<li class="page_menu_item"><a href="index.html">Главная<i class="fa fa-angle-down"></i></a></li>
+								<li class="page_menu_item"><a href="shop.html">Магазин<i class="fa fa-angle-down"></i></a></li>
+								<li class="page_menu_item"><a href="cart.html">Корзина<i class="fa fa-angle-down"></i></a></li>
+								<li class="page_menu_item"><a href="contact.html">Контакты<i class="fa fa-angle-down"></i></a></li>
+							</ul>
+							
+							<div class="menu_contact">
+								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/phone_menu.svg" alt=""></div><a @click="openTel()">+{{data.tel}}</a></div>
+								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/whatsapp_menu.svg" alt=""></div><a @click="openWhatsApp">+{{data.whatsapp}}</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+	
+	<!-- Главная -->
+
+	<div class="home">
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
+		<div class="home_overlay"></div>
+		<div class="home_content d-flex flex-column align-items-center justify-content-center">
+			<h2 class="home_title">{{currentCategory}}</h2>
+			<h2 class="home_title">{{currentSubcategory}}</h2>
+			<br><br>
+			<h2 class="home_title" style="color:#a3a3a3;">{{currentBrand}}</h2>
+		</div>
+	</div>
+
+	<!-- Магазин -->
+
+	<div class="shop">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+
+					<!-- Магазин Sidebar -->
+					<div class="shop_sidebar">
+						<div class="sidebar_section">
+							<div class="sidebar_title">Категории</div>
+							<ul class="sidebar_categories">
+							    <li>
+								    <a @click="onCategory('')" :style="{color: currentCategory === '' ? '#0e8ce4' : '#a3a3a3'}">Все категории</a>
+								</li>
+								<li v-for="(category, index) in categories" :key="index">
+								    <a @click="onCategory(category.category)" :style="{color: category.category === currentCategory ? '#0e8ce4' : '#a3a3a3'}">{{category.category}}</a>
+								</li>
+							</ul>
+						</div>
+						<div class="sidebar_section">
+							<div class="sidebar_subtitle brands_subtitle">Бренды</div>
+							<ul class="brands_list">
+							    <li v-for="(brand, index) in brands" :key="index" class="brand">
+									<a @click="onBrand(brand.brand)" :style="{color: brand.brand === currentBrand ? '#0e8ce4' : '#a3a3a3'}">{{brand.brand}}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-lg-9">
+					
+					<!-- Магазин Content -->
+
+					<div class="shop_content">
+						<div class="shop_bar clearfix">
+							<div class="shop_product_count">Найдено <span>{{currentProducts.length}}</span> товар(ов)</div>
+							<div class="shop_sorting">
+								<span>Сортировать по:</span>
+								<ul>
+									<li>
+										<span class="sorting_text">не выбрана<i class="fas fa-chevron-down"></span></i>
+										<ul>
+											<li @click="onSortName()" class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>Названию</li>
+											<li @click="onSortPrice()" class="shop_sorting_button" data-isotope-option='{ "sortBy": "price" }'>Цене</li>
+											<li @click="onSortDiscount()" class="shop_sorting_button" data-isotope-option='{ "sortBy": "discount" }'>Скидке</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="row">
+						
+							<!-- START Single Product -->
+							<div v-for="(item, index) in showProducts" :key="index" :class="{is_new: item.isNew && !item.discount, discount: item.discount}" class="col-sm-6 col-lg-3 product_item">
+								<div class="product_border"></div>
+								<div @click="onProduct(item)" class="product_image d-flex flex-column align-items-center justify-content-center"><img :src="item.image" height="115px" alt=""></div>
+								<div class="product_content">
+									<div class="product_price">&#8381;{{item.price}}<span v-if="item.discount">&#8381;{{Math.round(item.price * (1 + (item.discount/100)))}}</span></div>
+									<div class="product_name"><div><a style="color:#000000;">{{item.title}}</a></div></div>
+								</div>
+								<div v-if="!wishlist.find(w => w.id === item.id)" @click.stop="addWishlist(item)" class="product_fav"><i class="fas fa-heart"></i></div>
+								<div v-else @click.stop="addWishlist(item)" class="product_fav"><i style="color:#0e8ce4;" class="fas fa-heart"></i></div>
+								<ul class="product_marks">
+									<li class="product_mark product_discount">{{item.discount}}%</li>
+									<li class="product_mark product_new">new</li>
+								</ul>
+							</div>
+						  <!-- END Single Product -->
+
+						</div>
+
+						<!-- Магазин Page Navigation -->
+
+						<div class="shop_page_nav d-flex flex-row">
+							<div @click="diPage" class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
+							<ul class="page_nav d-flex flex-row">
+								<li><a>{{page + 1}}</a></li>
+								<li><a>из</a></li>
+								<li><a>{{Math.ceil(currentProducts.length/12)}}</a></li>
+							</ul>
+							<div @click="inPage" class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Недавно просмотренные -->
+	
+    <div v-if="wishlist.length" id="wishlist" class="viewed">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="viewed_title_container">
+						<h3 class="viewed_title">Понравившиеся</h3>
+						<div class="viewed_nav_container">
+							<div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
+							<div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
+						</div>
+					</div>
+
+					<div class="viewed_slider_container">
+						
+						<!-- Slider -->
+
+						<div class="owl-carousel owl-theme viewed_slider">
+							
+							<!--  Item -->
+							<div v-for="(item, index) in wishlist" :key="index" class="owl-item">
+								<div :class="{is_new: item.isNew && !item.discount, discount: item.discount}" class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+									<div @click="onProduct(item)" style="cursor:pointer;" class="viewed_image"><img :src="item.image" height="115px" alt=""></div>
+									<div class="viewed_content text-center">
+										<div class="viewed_price">&#8381;{{item.price}}<span v-if="item.discount">&#8381;{{Math.round(item.price * (1 + (item.discount/100)))}}</span></div>
+										<div class="viewed_name">{{item.title}}</div>
+									</div>
+									<ul class="item_marks">
+										<li class="item_mark item_discount">{{item.discount}}%</li>
+										<li class="item_mark item_new">new</li>
+									</ul>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Brands -->
+
+	<div class="brands">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="brands_slider_container">
+						
+						<!-- Brands Slider -->
+
+						<div class="owl-carousel owl-theme brands_slider">
+							
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_1.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_2.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_3.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_4.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_5.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_6.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_7.jpg" alt=""></div></div>
+							<div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="images/brands_8.jpg" alt=""></div></div>
+
+						</div>
+						
+						<!-- Brands Slider Navigation -->
+						<div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
+						<div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Newsletter -->
+
+	<div class="newsletter">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+						<div class="newsletter_title_container">
+							<div class="newsletter_icon"><img src="images/send.png" alt=""></div>
+							<div class="newsletter_title">Подписаться на рассылку</div>
+							<div class="newsletter_text"><p>... и получайте уведомления о новых акциях.</p></div>
+						</div>
+						<div class="newsletter_content clearfix">
+							<form class="newsletter_form">
+								<input type="email" class="newsletter_input" required="required" placeholder="Введите ваш адрес электронной почты">
+								<button @click="sendEmail()" class="newsletter_button">Подписаться</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-3 footer_col">
+					<div class="footer_column footer_contact">
+						<div class="logo_container">
+							<div class="logo"><a href="#">{{data.title}}</a></div>
+						</div>
+						<div class="footer_title">Есть вопрос? Звоните нам 24/7</div>
+						<div class="footer_phone">+{{data.tel}}</div>
+						<div class="footer_contact_text">
+							<p>{{data.address?.street}}, {{data.address?.city}}</p>
+							<p>{{data.address?.region}}, {{data.address?.country}}</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</footer>
+	
+	<!-- Copyright -->
+
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					
+					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+						<div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy; {{copyright}} All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</div>
+						<div class="logos ml-sm-auto">
+							<ul class="logos_list">
+								<li><a><img src="images/sberlogo.svg" alt=""></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<!-- End Vue -->
+<script src="vue.js"></script>
+<script src="resources/shop-data.js"></script>
+<script src="resources/shop-products.js"></script>
+<script>
+	new Vue({
+	  el: '#shop_app',
+	  data() {
+		return {
+		    data: {},
+			search: '',
+			categories: [],
+			brands: [],
+			currentProducts: [],
+			page: 0,
+			currentCategory: '',
+			currentBrand: '',
+			currentSubcategory: '',
+			cart: [],
+			wishlist: [],
+			viewed: [],
+			copyright: '',
+		}
+	  },
+	  mounted() {
+	    this.data = data;
+		this.categories = this.getCategories(products);
+		this.brands = this.getBrands(products);
+		let search = JSON.parse(sessionStorage.getItem("shop-search"));
+		if(search){
+		  this.currentProducts = search;
+		  sessionStorage.removeItem("shop-search");
+		} else {
+			let shopData = JSON.parse(sessionStorage.getItem("shop-data"));
+			if(shopData){
+			  this.currentCategory = shopData.category;
+			  this.currentSubcategory = shopData.subcategory;
+			  if(this.currentCategory){
+				  if(this.currentSubcategory){
+					this.currentProducts = products.filter(product => product.category === this.currentCategory && product.subcategory === this.currentSubcategory);
+				  } else {
+					this.currentProducts = products.filter(product => product.category === this.currentCategory);
+				  }
+			  }
+			} else {
+			    this.currentProducts = products;
+			}
+		}
+		let cart = JSON.parse(localStorage.getItem("shop-cart"));
+		if(cart){
+		  this.cart = cart;
+		}
+		let wishlist = JSON.parse(localStorage.getItem("shop-wishlist"));
+		if(wishlist){
+		  this.wishlist = wishlist;
+		}
+		this.copyright = new Date().getFullYear();
+	  },
+	  computed:{
+		showProducts(){
+		    let count = this.page * 12;
+			let length = count + 12;
+			let array = [];
+			for(let i = count; i < length; i++){
+				if(this.currentProducts[i]){
+				  array.push(this.currentProducts[i]);
+				}
+			}
+			return array;
+		},
+		totalAmount(){
+		  let total = 0;
+		  for(let product of this.cart){
+		    total = total + product.price * product.qt;
+		  }
+		  return total;
+		}
+	  },
+	  methods:{
+	    openTel(){
+			window.open(`tel:+${this.data.tel}`);
+		},
+		openWhatsApp(){
+			window.open(`https://wa.me/${this.data.whatsapp}`);
+		},
+	    sendEmail() {
+		  const email = this.data.email;
+		  const subject = 'Подписка';
+		  const body = 'Я согласен на подписку!';
+
+		  window.open(`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+		},
+	    onSearch(){
+			if(this.search){
+				let search = [];
+				for(let product of products){
+				  if(product.category.toLowerCase().includes(this.search.toLowerCase())){
+					search.push(product);
+				  } else if(product.subcategory.toLowerCase().includes(this.search.toLowerCase())){
+					search.push(product);
+				  } else if(product.title.toLowerCase().includes(this.search.toLowerCase())){
+					search.push(product);
+				  } else if(product.description.toLowerCase().includes(this.search.toLowerCase())){
+					search.push(product);
+				  }
+				}
+				this.currentCategory = '';
+		        this.currentSubcategory = '';
+				this.currentBrand = '';
+				this.currentProducts = search;
+				this.search = '';
+			}
+		},
+	    onSortName(){
+		    this.currentProducts.sort(function(a, b){
+				var titleA=a.title.toLowerCase(), titleB=b.title.toLowerCase()
+				if (titleA < titleB) //сортируем строки по возрастанию
+				  return -1
+				if (titleA > titleB)
+				  return 1
+				return 0 // Никакой сортировки
+			});
+		},
+	    onSortPrice(){
+		    this.currentProducts.sort(function(a, b){
+			  return a.price - b.price;
+			});
+		},
+		onSortDiscount(){
+		    this.currentProducts.sort(function(a, b){
+			  return b.discount - a.discount;
+			});
+		},
+	    addWishlist(product){
+			let isAdd = false;
+			for(let i = 0; i < this.wishlist.length; i++){
+			  if(this.wishlist[i].id === product.id){
+				this.wishlist.splice(i, 1);
+				isAdd = true;
+				break;
+			  }
+			}
+			if(!isAdd){
+			  this.wishlist.unshift(product);
+			}
+			localStorage.setItem("shop-wishlist", JSON.stringify(this.wishlist));
+		},
+		addViewed(product){
+			let isAdd = false;
+			for(let item of this.viewed){
+			  if(item.id === product.id){
+				isAdd = true;
+				break;
+			  }
+			}
+			if(!isAdd){
+			  if(this.viewed.length >= 24){
+				this.viewed.pop();
+				this.viewed.unshift(product);
+			  } else {
+				this.viewed.unshift(product);
+			  }
+			}
+			localStorage.setItem("shop-viewed", JSON.stringify(this.viewed));
+		},
+		onProduct(product){
+			localStorage.setItem("shop-product", JSON.stringify(product));
+			this.addViewed(product);
+			window.location.href = "product.html";
+		},
+	    onCategory(category){
+		    this.currentCategory = category;
+		    this.currentSubcategory = '';
+			let data = {category:this.currentCategory, subcategory:this.currentSubcategory};
+		    sessionStorage.setItem("shop-data", JSON.stringify(data));
+		    //this.currentProducts.splice(this.currentProducts.length);
+			if(!this.currentCategory){
+			  this.currentProducts = products;
+			  this.currentBrand = '';
+			} else {
+			  this.currentProducts = products.filter(product => product.category === this.currentCategory);
+			}
+		    if(this.currentBrand){
+		      this.currentProducts = this.currentProducts.filter(product => product.brand === this.currentBrand);
+		    }
+		},
+		onSubcategory(category, subcategory){
+		    this.currentCategory = category;
+		    this.currentSubcategory = subcategory;
+			let data = {category:this.currentCategory, subcategory:this.currentSubcategory};
+		    sessionStorage.setItem("shop-data", JSON.stringify(data));
+		    //this.currentProducts.splice(this.currentProducts.length);
+		    if(this.currentCategory === '' && this.currentSubcategory === ''){
+			  this.currentProducts = products;
+			} else {
+			  this.currentProducts = products.filter(product => product.category === this.currentCategory && product.subcategory === this.currentSubcategory);
+			}
+			if(this.currentBrand){
+		      this.currentProducts = this.currentProducts.filter(product => product.brand === this.currentBrand);
+		    }
+		},
+		onBrand(brand){
+		    this.currentBrand = brand;
+		    //this.currentProducts.splice(this.currentProducts.length);
+			this.currentProducts = products.filter(product => product.brand === this.currentBrand);
+		    if(this.currentCategory){
+			  if(this.currentSubcategory){
+		        this.currentProducts = this.currentProducts.filter(product => product.category === this.currentCategory && product.subcategory === this.currentSubcategory);
+		      } else {
+			    this.currentProducts = this.currentProducts.filter(product => product.category === this.currentCategory);
+			  }
+		    }
+		},
+		inPage(){
+		    let page = Math.floor(this.currentProducts.length/12);
+		    if(this.page < page){
+			    this.page++;
+			}
+		},
+		diPage(){
+		    if(this.page > 0){
+			    this.page--;
+			}
+		},
+		getCategories(products){
+			let categories = [];
+			let map = new Map();
+			for(let product of products){
+			  map = {category: product.category, subcategories: [{subcategory: product.subcategory}]};
+			  categories.push(map);
+			}
+			
+			categories = categories.filter((value, index, self) =>
+			  index === self.findIndex((t) => (
+				t.category === value.category && t.subcategories[0].subcategory === value.subcategories[0].subcategory
+			  ))
+			)
+			
+			for(let category of categories){
+			  for(let i = 0; i < categories.length; i++){
+				if(category.category === categories[i].category){
+				  category.subcategories.push(categories[i].subcategories[0]);
+				}
+			  }
+			  category.subcategories.splice(0, 1);
+			}
+			
+			categories = categories.filter((value, index, self) =>
+			  index === self.findIndex((t) => (
+				t.category === value.category
+			  ))
+			)
+			
+			return categories;
+		},
+		getBrands(products){
+			let brands = [];
+			let map = new Map();
+			for(let product of products){
+			  map = {brand: product.brand};
+			  brands.push(map);
+			}
+			
+			brands = brands.filter((value, index, self) =>
+			  index === self.findIndex((t) => (
+				t.brand === value.brand
+			  ))
+			);
+			
+			return brands;
+		}
+	  }
+	})
+</script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/greensock/TweenMax.min.js"></script>
+<script src="plugins/greensock/TimelineMax.min.js"></script>
+<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="plugins/greensock/animation.gsap.min.js"></script>
+<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/shop_custom.js"></script>
+</body>
+
+</html>
