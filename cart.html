@@ -330,7 +330,6 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 			cart: [],
 			wishlist: [],
 			message: '',
-			phone: '+79640626525',
 			copyright: '',
 		}
 	  },
@@ -372,14 +371,15 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 		},
 	    sendOrder() {
 		      let message = '';
-			  if (!this.phone.startsWith('+')) {
-				this.phone = `+${this.phone}`;
+			  let phone = data.whatsapp;
+			  if (!phone.startsWith('+')) {
+				phone = `+${phone}`;
 			  }
 			  for(let item of this.cart){
 				message = `${message}${item.title}(${item.qt});\n`;
 			  }
 			  this.message = `*Заказ:* ${message}\n*Сумма:* ${this.totalAmount} руб.`;
-			  const url = `https://wa.me/${this.phone}?text=${encodeURIComponent(this.message)}`;
+			  const url = `https://wa.me/${phone}?text=${encodeURIComponent(this.message)}`;
 			  //window.location.href = url;
 			  window.open(url);
 		},
