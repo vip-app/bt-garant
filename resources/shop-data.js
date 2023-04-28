@@ -1,7 +1,7 @@
 const data = {
 		title: "BTGarant",
-		tel: "79640626525",
-		whatsapp: "79640626525",
+		tel: "79635995665",
+		whatsapp: "79635995665",
 		telegram: "",
 		image: "",
 		email: "seemenu.ru@gmail.com",

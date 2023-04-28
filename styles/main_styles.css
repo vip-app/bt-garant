@@ -2555,16 +2555,19 @@ select option
 }
 .bestsellers_image
 {
-	width: 115px;
 	height: 115px;
 }
 .bestsellers_image img
 {
-	max-width: 100px;
+	max-width: 115px;
 }
 .bestsellers_content
 {
 	padding-left: 15px;
+	width:90%;
+	white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    text-overflow: ellipsis; /* Добавляем многоточие */
 }
 .bestsellers_category a
 {
@@ -2583,10 +2586,7 @@ select option
 .bestsellers_name
 {
 	margin-top: 2px;
-	width:70%;
-	white-space: nowrap; /* Запрещаем перенос строк */
-    overflow: hidden; /* Обрезаем все, что не помещается в область */
-    text-overflow: ellipsis; /* Добавляем многоточие */
+	
 }
 .bestsellers_name a
 {

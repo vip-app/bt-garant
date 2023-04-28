@@ -31,7 +31,7 @@
 				<div class="row">
 					<div class="col d-flex flex-row">
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.svg" alt=""></div><a @click="openTel()">+{{data.tel}}</a></div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/whatsapp.svg" alt=""></div><a @click="openWhatsApp">+{{data.whatsapp}}</a></div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/whatsapp.svg" alt=""></div><a @click="openWhatsApp()">+{{data.whatsapp}}</a></div>
 					</div>
 				</div>
 			</div>		
@@ -270,7 +270,7 @@
 									<div @click="onProduct(item)" style="cursor:pointer;" class="viewed_image"><img :src="item.image" height="115px" alt=""></div>
 									<div class="viewed_content text-center">
 										<div class="viewed_price">&#8381;{{item.price}}<span v-if="item.discount">&#8381;{{Math.round(item.price * (1 + (item.discount/100)))}}</span></div>
-										<div class="viewed_name">{{item.title}}</div>
+										<div @click="onProduct(item)" class="viewed_name">{{item.title}}</div>
 									</div>
 									<ul class="item_marks">
 										<li class="item_mark item_discount">{{item.discount}}%</li>
@@ -356,7 +356,7 @@
 							<div class="logo"><a href="#">{{data.title}}</a></div>
 						</div>
 						<div class="footer_title">Есть вопрос? Звоните нам 24/7</div>
-						<div class="footer_phone">+{{data.tel}}</div>
+						<div @click="openTel()" class="footer_phone">+{{data.tel}}</div>
 						<div class="footer_contact_text">
 							<p>{{data.address?.street}}, {{data.address?.city}}</p>
 							<p>{{data.address?.region}}, {{data.address?.country}}</p>
@@ -392,7 +392,7 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 </div>
 </div>
 <!-- End Vue -->
-<script src="vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
 <script src="resources/shop-data.js"></script>
 <script src="resources/shop-products.js"></script>
 <script>

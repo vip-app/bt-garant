@@ -178,7 +178,7 @@
 							
 							<div class="menu_contact">
 								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/phone_menu.svg" alt=""></div><a @click="openTel()">+{{data.tel}}</a></div>
-								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/whatsapp_menu.svg" alt=""></div><a @click="openWhatsApp">+{{data.whatsapp}}</a></div>
+								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="images/whatsapp_menu.svg" alt=""></div><a @click="openWhatsApp()">+{{data.whatsapp}}</a></div>
 							</div>
 						</div>
 					</div>
@@ -232,6 +232,7 @@
 								<div class="order_total_amount">&#8381;{{totalAmount}}</div>
 							</div>
 						</div>
+						<div style="color:gray;margin-top:30px;">После получения заказа менеджер свяжется с Вами для подтверждения Вашего заказа и уточнения удобного для Вас способа оплаты и доставки заказа.</div>
 						<div class="cart_buttons">
 							<button @click="removeCart()" type="button" class="button cart_button_checkout">Очистить</button>
 							<button @click="sendOrder()" type="button" class="button cart_button_checkout">Отправить заказ</button>
@@ -278,7 +279,7 @@
 							<div class="logo"><a href="#">{{data.title}}</a></div>
 						</div>
 						<div class="footer_title">Есть вопрос? Звоните нам 24/7</div>
-						<div class="footer_phone">+{{data.tel}}</div>
+						<div @click="openTel()" class="footer_phone">+{{data.tel}}</div>
 						<div class="footer_contact_text">
 							<p>{{data.address?.street}}, {{data.address?.city}}</p>
 							<p>{{data.address?.region}}, {{data.address?.country}}</p>
@@ -315,7 +316,7 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 </div>
 </div>
 <!-- End Vue -->
-<script src="vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
 <script src="resources/shop-data.js"></script>
 <script src="resources/shop-products.js"></script>
 <script>

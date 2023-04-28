@@ -11,9 +11,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Samsung',
-    timeofcreation: 0
+    brand: 'Samsung'
   },
   {
     id: 2,
@@ -27,9 +25,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'LG',
-    timeofcreation: 0
+    brand: 'LG'
   },
   {
     id: 3,
@@ -38,14 +34,12 @@ const products = [
     subcategory: 'Газовые плиты',
     title: 'Газовая плита ПГ 1200 С7 К8',
     description: 'Цвет: белый. Варочная поверхность: эмалированная. Габаритные размеры ШхГхВ: 60х60х85 см. Полезный объём духовки: 63 л',
-    image: 'images/products/image_3.webp',
+ image: 'images/products/image_3.webp',
     price: 11628,
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gefest',
-    timeofcreation: 0
+    brand: 'Gefest'
   },
   {
     id: 4,
@@ -59,9 +53,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gefest',
-    timeofcreation: 0
+    brand: 'Gefest'
   },
   {
     id: 5,
@@ -75,9 +67,7 @@ const products = [
     discount: 10,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gefest',
-    timeofcreation: 0
+    brand: 'Gefest'
   },
   {
     id: 6,
@@ -91,9 +81,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gefest',
-    timeofcreation: 0
+    brand: 'Gefest'
   },
   {
     id: 8,
@@ -101,15 +89,13 @@ const products = [
     icon: null,
     subcategory: 'Варочные панели',
     title: 'Газовая варочная панель Gefest ПВГ 1212 К83, черный',
-    description: 'Газ-контроль конфорок: есть. Тип панели: газовая варочная поверхность. Расположение панели: спереди. Экспресс-конфорок: 1. Газовых конфорок: 4. Чугунные решетки: есть. Цвет панели конфорок: коричневый. Электроподжиг: автоматический. Глубина: 52 см. Материал панели: эмаль. Наличие электоподжига: есть. Переключатели: поворотные. Ширина: 59 см. Установка: независимая. Высота: 8.5 см. Количество конфорок 4: 4.',
+    description: 'Газ-контроль конфорок: есть. Тип панели: газовая варочная поверхность. Расположение панели: спереди. Экспресс-конфорок:1. Газовых конфорок: 4. Чугунные решетки: есть. Цвет панели конфорок: коричневый. Электроподжиг: автоматический. Глубина: 52 см. Материал панели: эмаль. Наличие электоподжига: есть. Переключатели: поворотные. Ширина: 59 см. Установка: независимая. Высота: 8.5 см. Количество конфорок 4: 4.',
     image: 'images/products/image_8.webp',
     price: 8711,
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gefest',
-    timeofcreation: 0
+    brand: 'Gefest'
   },
   {
     id: 9,
@@ -123,9 +109,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 10,
@@ -139,9 +123,7 @@ const products = [
     discount: 0,
     isNew: true,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 11,
@@ -155,9 +137,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 12,
@@ -171,9 +151,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 13,
@@ -187,9 +165,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Bosch',
-    timeofcreation: 0
+    brand: 'Bosch'
   },
   {
     id: 14,
@@ -203,9 +179,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Bosch',
-    timeofcreation: 0
+    brand: 'Bosch'
   },
   {
     id: 15,
@@ -219,9 +193,7 @@ const products = [
     discount: 15,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Bosch',
-    timeofcreation: 0
+    brand: 'Bosch'
   },
   {
     id: 16,
@@ -235,9 +207,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Bosch',
-    timeofcreation: 0
+    brand: 'Bosch'
   },
   {
     id: 17,
@@ -251,9 +221,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gorenje',
-    timeofcreation: 0
+    brand: 'Gorenje'
   },
   {
     id: 18,
@@ -267,9 +235,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'LG',
-    timeofcreation: 0
+    brand: 'LG'
   },
   {
     id: 19,
@@ -283,9 +249,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 20,
@@ -299,9 +263,7 @@ const products = [
     discount: 0,
     isNew: true,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 21,
@@ -315,9 +277,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 22,
@@ -331,9 +291,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 23,
@@ -347,9 +305,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 24,
@@ -363,9 +319,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 25,
@@ -379,9 +333,7 @@ const products = [
     discount: 5,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestfrost',
-    timeofcreation: 0
+    brand: 'Vestfrost'
   },
   {
     id: 26,
@@ -395,9 +347,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestfrost',
-    timeofcreation: 0
+    brand: 'Vestfrost'
   },
   {
     id: 27,
@@ -411,9 +361,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestfrost',
-    timeofcreation: 0
+    brand: 'Vestfrost'
   },
   {
     id: 28,
@@ -427,9 +375,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestfrost',
-    timeofcreation: 0
+    brand: 'Vestfrost'
   },
   {
     id: 29,
@@ -443,9 +389,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gefest',
-    timeofcreation: 0
+    brand: 'Gefest'
   },
   {
     id: 30,
@@ -459,9 +403,7 @@ const products = [
     discount: 0,
     isNew: true,
     qt: 1,
-    action: false,
-    brand: 'Gefest',
-    timeofcreation: 0
+    brand: 'Gefest'
   },
   {
     id: 31,
@@ -475,9 +417,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'LG',
-    timeofcreation: 0
+    brand: 'LG'
   },
   {
     id: 32,
@@ -491,9 +431,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gorenje',
-    timeofcreation: 0
+    brand: 'Gorenje'
   },
   {
     id: 33,
@@ -501,15 +439,13 @@ const products = [
     icon: 'images/icons/tfork.webp',
     subcategory: 'Морозильные лари',
     title: 'Морозильный ларь KRAFT BD (W)-203QX',
-    description: 'Морозильный ларь Kraft BD(W)-203QX станет отличным приобретением для квартиры, дома, отеля, офиса, либо промышленного помещения. Его особенностью является возможность использования в режиме холодильника. Устройство позволяет хранить большой объем продуктов питания длительное время. Благодаря лаконичной белой расцветке корпуса модель дополнит собой любой интерьер. Общий объем морозильного ларя достигает 195 л. Устройство имеет высокий класс энергоэффективности – А. Для комфортного хранения продуктов в камере предусмотрена подвесная корзина. Мощность замораживания модели соответствует 6,7 кг/сутки. Работа прибора сопровождается низким шума, не превышающим 42 дБ. ',
+    description: 'Морозильный ларь Kraft BD(W)-203QX станет отличным приобретением для квартиры, дома, отеля, офиса, либо промышленного помещения. Его особенностью является возможность использования в режиме холодильника. Устройство позволяет хранить большой объем продуктов питания длительное время. Благодаря лаконичной белой расцветке корпуса модель дополнит собой любой интерьер. Общий объем морозильного ларя достигает195 л. Устройство имеет высокий класс энергоэффективности – А. Для комфортного хранения продуктов в камере предусмотрена подвесная корзина. Мощность замораживания модели соответствует 6,7 кг/сутки. Работа прибора сопровождается низким шума, не превышающим 42 дБ. ',
     image: 'images/products/image_33.webp',
     price: 15500,
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Kraft',
-    timeofcreation: 0
+    brand: 'Kraft'
   },
   {
     id: 34,
@@ -523,9 +459,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Kraft',
-    timeofcreation: 0
+    brand: 'Kraft'
   },
   {
     id: 35,
@@ -539,9 +473,7 @@ const products = [
     discount: 10,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Kraft',
-    timeofcreation: 0
+    brand: 'Kraft'
   },
   {
     id: 36,
@@ -555,9 +487,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Kraft',
-    timeofcreation: 0
+    brand: 'Kraft'
   },
   {
     id: 37,
@@ -571,9 +501,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Kraft',
-    timeofcreation: 0
+    brand: 'Kraft'
   },
   {
     id: 38,
@@ -587,9 +515,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Kraft',
-    timeofcreation: 0
+    brand: 'Kraft'
   },
   {
     id: 39,
@@ -603,9 +529,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Vestel',
-    timeofcreation: 0
+    brand: 'Vestel'
   },
   {
     id: 40,
@@ -619,9 +543,7 @@ const products = [
     discount: 0,
     isNew: true,
     qt: 1,
-    action: false,
-    brand: 'ODUL',
-    timeofcreation: 0
+    brand: 'ODUL'
   },
   {
     id: 41,
@@ -635,9 +557,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gefest',
-    timeofcreation: 0
+    brand: 'Gefest'
   },
   {
     id: 42,
@@ -651,9 +571,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Gefest',
-    timeofcreation: 0
+    brand: 'Gefest'
   },
   {
     id: 43,
@@ -667,9 +585,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Bosch',
-    timeofcreation: 0
+    brand: 'Bosch'
   },
   {
     id: 44,
@@ -683,9 +599,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Samsung',
-    timeofcreation: 0
+    brand: 'Samsung'
   },
   {
     id: 45,
@@ -693,15 +607,13 @@ const products = [
     icon: null,
     subcategory: 'Пылесосы и аксессуары',
     title: 'Пылесос Samsung SC 18 M 21 D0VG, пылесос без мешка',
-    description: 'Больше никаких хлопот Чистить пылесос очень легко благодаря турбине с механизмом против запутывания: вам не придется очищать ее от намотавшихся волос, пыли и мусора. Удобный пылесборник легко отсоединить и опустошить одним нажатием кнопки. Более стабильная мощность всасывания Турбина с механизмом против запутывания помогает поддерживать более стабильную мощность всасывания в течение длительного времени, поскольку пылесос не забивается спутанными волосами. По результатам внутренних испытаний.',
+    description: 'Больше никаких хлопот Чистить пылесос очень легко благодаря турбине с механизмом против запутывания: вам не придется очищать ее от намотавшихся волос, пыли и мусора. Удобный пылесборник легко отсоединить и опустошить одним нажатием кнопки. Более стабильная мощность всасывания Турбина с механизмом против запутывания помогает поддерживать более стабильную мощность всасывания в течение длительного времени, поскольку пылесос не забивается спутанными волосами. По результатамвнутренних испытаний.',
     image: 'images/products/image_45.webp',
     price: 9168,
     discount: 5,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Samsung',
-    timeofcreation: 0
+    brand: 'Samsung'
   },
   {
     id: 46,
@@ -715,9 +627,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Samsung',
-    timeofcreation: 0
+    brand: 'Samsung'
   },
   {
     id: 47,
@@ -731,9 +641,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Samsung',
-    timeofcreation: 0
+    brand: 'Samsung'
   },
   {
     id: 48,
@@ -747,9 +655,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Samsung',
-    timeofcreation: 0
+    brand: 'Samsung'
   },
   {
     id: 49,
@@ -763,9 +669,7 @@ const products = [
     discount: 0,
     isNew: false,
     qt: 1,
-    action: false,
-    brand: 'Samsung',
-    timeofcreation: 0
+    brand: 'Samsung'
   },
   {
     id: 50,
@@ -779,8 +683,6 @@ const products = [
     discount: 0,
     isNew: true,
     qt: 1,
-    action: false,
-    brand: 'Samsung',
-    timeofcreation: 0
+    brand: 'Samsung'
   }
 ];
