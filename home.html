@@ -682,7 +682,12 @@ new Vue({
   },
   created(){
     this.data = data;
-	this.products = JSON.parse(localStorage.getItem("shop-products"));
+	let products = JSON.parse(localStorage.getItem("shop-products"));
+	if(products){
+	  this.products = products;
+	} else {
+	  window.location.href = "index.html";
+	}
   },
   mounted() {
     this.categories = this.getCategories(this.products);
@@ -826,7 +831,7 @@ new Vue({
         let categories = [];
 		let map = new Map();
 		for(let product of products){
-		  map = {icon: product.icon, category: product.category, subcategories: [{subcategory: product.subcategory}]};
+		  map = {icon: '', category: product.category, subcategories: [{subcategory: product.subcategory}]};
 		  categories.push(map);
 		}
 		
@@ -856,7 +861,16 @@ new Vue({
 	getTopcategories(categories){
         let topcategories = [];
 		for(let category of categories){
-		  if(category.icon){
+		  if(category.category === 'Ноутбуки и компьютеры'){
+		    category.icon = 'images/icons/nandk.webp'
+		    topcategories.push(category);
+		  }
+		  else if(category.category === 'Смартфоны и гаджеты'){
+		    category.icon = 'images/icons/sandg.webp'
+		    topcategories.push(category);
+		  }
+		  else if(category.category === 'Техника для кухни'){
+		    category.icon = 'images/icons/tfork.webp'
 		    topcategories.push(category);
 		  }
 		}

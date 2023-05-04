@@ -474,7 +474,12 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 	  },
 	  created(){
 	    this.data = data;
-		this.products = JSON.parse(localStorage.getItem("shop-products"));
+		let products = JSON.parse(localStorage.getItem("shop-products"));
+		if(products){
+		  this.products = products;
+		} else {
+		  window.location.href = "index.html";
+		}
 	  },
 	  mounted() {
 	    this.categories = this.getCategories(this.products);
