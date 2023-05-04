@@ -47,7 +47,7 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="index.html">{{data.title}}</a></div>
+							<div class="logo"><a href="home.html">{{data.title}}</a></div>
 						</div>
 					</div>
 
@@ -64,7 +64,7 @@
 												<ul class="custom_list clc"></ul>
 											</div>
 										</div>
-										<button @click="onSearch()" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
+										<button @click="onSearch(products)" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
 									</form>
 								</div>
 							</div>
@@ -125,7 +125,7 @@
 										<a :style="{color: category.category === currentCategory ? '#0e8ce4' : 'gray'}">{{category.category}}<i class="fas fa-chevron-right"></i></a>
 										<ul>
 											<li v-for="(subcategory, index) in category.subcategories" :key="index">
-												<a @click="onSubcategory(category.category, subcategory.subcategory)" :style="{color: subcategory.subcategory === currentSubcategory ? '#0e8ce4' : 'gray'}">{{subcategory.subcategory}}<i class="fas fa-chevron-right"></i></a>
+												<a @click="onSubcategory(category.category, subcategory.subcategory, products)" :style="{color: subcategory.subcategory === currentSubcategory ? '#0e8ce4' : 'gray'}">{{subcategory.subcategory}}<i class="fas fa-chevron-right"></i></a>
 											</li>
 										</ul>
 									</li>
@@ -136,7 +136,7 @@
 
 							<div class="main_nav_menu ml-auto mr-auto">
 								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="index.html">Главная<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="home.html">Главная<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="shop.html">Магазин<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="cart.html">Корзина<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="contact.html">Контакты<i class="fas fa-chevron-down"></i></a></li>
@@ -172,11 +172,11 @@
 							<div class="page_menu_search">
 								<form>
 									<input v-model="search" type="search" required="required" class="page_menu_search_input" placeholder="Поиск товаров...">
-									<button @click="onSearch()" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
+									<button @click="onSearch(products)" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
 								</form>
 							</div>
 							<ul class="page_menu_nav">
-								<li class="page_menu_item"><a href="index.html">Главная<i class="fa fa-angle-down"></i></a></li>
+								<li class="page_menu_item"><a href="home.html">Главная<i class="fa fa-angle-down"></i></a></li>
 								<li class="page_menu_item"><a href="shop.html">Магазин<i class="fa fa-angle-down"></i></a></li>
 								<li class="page_menu_item"><a href="cart.html">Корзина<i class="fa fa-angle-down"></i></a></li>
 								<li class="page_menu_item"><a href="contact.html">Контакты<i class="fa fa-angle-down"></i></a></li>
@@ -220,10 +220,10 @@
 							<div class="sidebar_title">Категории</div>
 							<ul class="sidebar_categories">
 							    <li>
-								    <a @click="onCategory('')" :style="{color: currentCategory === '' ? '#0e8ce4' : '#a3a3a3'}">Все категории</a>
+								    <a @click="onCategory('', products)" :style="{color: currentCategory === '' ? '#0e8ce4' : '#a3a3a3'}">Все категории</a>
 								</li>
 								<li v-for="(category, index) in categories" :key="index">
-								    <a @click="onCategory(category.category)" :style="{color: category.category === currentCategory ? '#0e8ce4' : '#a3a3a3'}">{{category.category}}</a>
+								    <a @click="onCategory(category.category, products)" :style="{color: category.category === currentCategory ? '#0e8ce4' : '#a3a3a3'}">{{category.category}}</a>
 								</li>
 							</ul>
 						</div>
@@ -231,7 +231,7 @@
 							<div class="sidebar_subtitle brands_subtitle">Бренды</div>
 							<ul class="brands_list">
 							    <li v-for="(brand, index) in brands" :key="index" class="brand">
-									<a @click="onBrand(brand.brand)" :style="{color: brand.brand === currentBrand ? '#0e8ce4' : '#a3a3a3'}">{{brand.brand}}</a>
+									<a @click="onBrand(brand.brand, products)" :style="{color: brand.brand === currentBrand ? '#0e8ce4' : '#a3a3a3'}">{{brand.brand}}</a>
 								</li>
 							</ul>
 						</div>
@@ -264,9 +264,9 @@
 						<div class="row">
 						
 							<!-- START Single Product -->
-							<div v-for="(item, index) in showProducts" :key="index" :class="{is_new: item.isNew && !item.discount, discount: item.discount}" class="col-sm-6 col-lg-3 product_item">
+							<div v-for="(item, index) in showProducts" :key="index" :class="{is_new: item.is_new && !item.discount, discount: item.discount}" class="col-sm-6 col-lg-3 product_item">
 								<div class="product_border"></div>
-								<div @click="onProduct(item)" class="product_image d-flex flex-column align-items-center justify-content-center"><img :src="item.image" height="115px" alt=""></div>
+								<div @click="onProduct(item)" class="product_image d-flex flex-column align-items-center justify-content-center"><img :src="item.image1" height="115px" alt=""></div>
 								<div class="product_content">
 									<div class="product_price">&#8381;{{item.price}}<span v-if="item.discount">&#8381;{{Math.round(item.price * (1 + (item.discount/100)))}}</span></div>
 									<div class="product_name"><div><a style="color:#000000;">{{item.title}}</a></div></div>
@@ -323,8 +323,8 @@
 							
 							<!--  Item -->
 							<div v-for="(item, index) in wishlist" :key="index" class="owl-item">
-								<div :class="{is_new: item.isNew && !item.discount, discount: item.discount}" class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div @click="onProduct(item)" style="cursor:pointer;" class="viewed_image"><img :src="item.image" height="115px" alt=""></div>
+								<div :class="{is_new: item.is_new && !item.discount, discount: item.discount}" class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+									<div @click="onProduct(item)" style="cursor:pointer;" class="viewed_image"><img :src="item.image1" height="115px" alt=""></div>
 									<div class="viewed_content text-center">
 										<div class="viewed_price">&#8381;{{item.price}}<span v-if="item.discount">&#8381;{{Math.round(item.price * (1 + (item.discount/100)))}}</span></div>
 										<div @click="onProduct(item)" class="viewed_name">{{item.title}}</div>
@@ -451,13 +451,13 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 <!-- End Vue -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
 <script src="resources/shop-data.js"></script>
-<script src="resources/shop-products.js"></script>
 <script>
 	new Vue({
 	  el: '#shop_app',
 	  data() {
 		return {
 		    data: {},
+			products: [],
 			search: '',
 			categories: [],
 			brands: [],
@@ -472,10 +472,13 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 			copyright: '',
 		}
 	  },
-	  mounted() {
+	  created(){
 	    this.data = data;
-		this.categories = this.getCategories(products);
-		this.brands = this.getBrands(products);
+		this.products = JSON.parse(localStorage.getItem("shop-products"));
+	  },
+	  mounted() {
+	    this.categories = this.getCategories(this.products);
+		this.brands = this.getBrands(this.products);
 		let search = JSON.parse(sessionStorage.getItem("shop-search"));
 		if(search){
 		  this.currentProducts = search;
@@ -487,13 +490,13 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 			  this.currentSubcategory = shopData.subcategory;
 			  if(this.currentCategory){
 				  if(this.currentSubcategory){
-					this.currentProducts = products.filter(product => product.category === this.currentCategory && product.subcategory === this.currentSubcategory);
+					this.currentProducts = this.products.filter(product => product.category === this.currentCategory && product.subcategory === this.currentSubcategory);
 				  } else {
-					this.currentProducts = products.filter(product => product.category === this.currentCategory);
+					this.currentProducts = this.products.filter(product => product.category === this.currentCategory);
 				  }
 			  }
 			} else {
-			    this.currentProducts = products;
+			    this.currentProducts = this.products;
 			}
 		}
 		let cart = JSON.parse(localStorage.getItem("shop-cart"));
@@ -540,7 +543,7 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 
 		  window.open(`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
 		},
-	    onSearch(){
+	    onSearch(products){
 			if(this.search){
 				let search = [];
 				for(let product of products){
@@ -618,7 +621,7 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 			this.addViewed(product);
 			window.location.href = "product.html";
 		},
-	    onCategory(category){
+	    onCategory(category, products){
 		    this.currentCategory = category;
 		    this.currentSubcategory = '';
 			let data = {category:this.currentCategory, subcategory:this.currentSubcategory};
@@ -634,7 +637,7 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 		      this.currentProducts = this.currentProducts.filter(product => product.brand === this.currentBrand);
 		    }
 		},
-		onSubcategory(category, subcategory){
+		onSubcategory(category, subcategory, products){
 		    this.currentCategory = category;
 		    this.currentSubcategory = subcategory;
 			let data = {category:this.currentCategory, subcategory:this.currentSubcategory};
@@ -649,7 +652,7 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 		      this.currentProducts = this.currentProducts.filter(product => product.brand === this.currentBrand);
 		    }
 		},
-		onBrand(brand){
+		onBrand(brand, products){
 		    this.currentBrand = brand;
 		    //this.currentProducts.splice(this.currentProducts.length);
 			this.currentProducts = products.filter(product => product.brand === this.currentBrand);

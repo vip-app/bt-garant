@@ -43,7 +43,7 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="index.html">{{data.title}}</a></div>
+							<div class="logo"><a href="home.html">{{data.title}}</a></div>
 						</div>
 					</div>
 
@@ -60,7 +60,7 @@
 												<ul class="custom_list clc"></ul>
 											</div>
 										</div>
-										<button @click="onSearch()" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
+										<button @click="onSearch(products)" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
 									</form>
 								</div>
 							</div>
@@ -130,7 +130,7 @@
 
 							<div class="main_nav_menu ml-auto mr-auto">
 								<ul class="standard_dropdown main_nav_dropdown">
-									<li><a href="index.html">Главная<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="home.html">Главная<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="shop.html">Магазин<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="cart.html">Корзина<i class="fas fa-chevron-down"></i></a></li>								
 									<li><a href="contact.html">Контакты<i class="fas fa-chevron-down"></i></a></li>
@@ -166,11 +166,11 @@
 							<div class="page_menu_search">
 								<form>
 									<input v-model="search" type="search" required="required" class="page_menu_search_input" placeholder="Поиск товаров...">
-									<button @click="onSearch()" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
+									<button @click="onSearch(products)" type="button" class="header_search_button trans_300"><img src="images/search.png" alt=""></button>
 								</form>
 							</div>
 							<ul class="page_menu_nav">
-								<li class="page_menu_item"><a href="index.html">Главная<i class="fa fa-angle-down"></i></a></li>
+								<li class="page_menu_item"><a href="home.html">Главная<i class="fa fa-angle-down"></i></a></li>
 								<li class="page_menu_item"><a href="shop.html">Магазин<i class="fa fa-angle-down"></i></a></li>
 								<li class="page_menu_item"><a href="cart.html">Корзина<i class="fa fa-angle-down"></i></a></li>
 								<li class="page_menu_item"><a href="contact.html">Контакты<i class="fa fa-angle-down"></i></a></li>
@@ -199,7 +199,7 @@
 						<div v-if="cart.length" class="cart_items">
 							<ul class="cart_list">
 								<li v-for="(item, index) in cart" :key="index" class="cart_item clearfix">
-									<div class="cart_item_image"><img :src="item.image" height="130px" alt=""></div>
+									<div class="cart_item_image"><img :src="item.image1" height="130px" alt=""></div>
 									<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
 									    <div class="cart_item_name cart_info_col">
 											<div class="cart_item_title">Наименование</div>
@@ -318,13 +318,13 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 <!-- End Vue -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
 <script src="resources/shop-data.js"></script>
-<script src="resources/shop-products.js"></script>
 <script>
 	new Vue({
 	  el: '#cart_app',
 	  data() {
 		return {
 		    data: {},
+			products: [],
 			search: '',
 			categories: [],
 			cart: [],
@@ -333,8 +333,11 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 			copyright: '',
 		}
 	  },
+	  created(){
+	    this.data = data;
+	  },
 	  mounted() {
-		this.data = data;
+	    this.products = JSON.parse(localStorage.getItem("shop-products"));
 		let cart = JSON.parse(localStorage.getItem("shop-cart"));
 		if(cart){
 		  this.cart = cart;
@@ -343,7 +346,7 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 		if(wishlist){
 		  this.wishlist = wishlist;
 		}
-		this.categories = this.getCategories(products);
+		this.categories = this.getCategories(this.products);
 		this.copyright = new Date().getFullYear();
 	  },
 	  computed:{
@@ -383,7 +386,7 @@ Copyright &copy; {{copyright}} All rights reserved | This template is made with 
 			  //window.location.href = url;
 			  window.open(url);
 		},
-	    onSearch(){
+	    onSearch(products){
 			if(this.search){
 				let search = [];
 				for(let product of products){
