@@ -1,10 +1,10 @@
 const data = {
-		title: "BTGarant",
+		title: "Garant",
 		tel: "79635995665",
 		whatsapp: "79635995665",
 		telegram: "",
 		image: "",
-		email: "seemenu.ru@gmail.com",
+		email: "haladov1979@icloud.com",
 		location: "43.668874, 45.101263",
 		address: {
 			street: "На территории заправки Groztek",
